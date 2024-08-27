@@ -11,6 +11,12 @@
   color: white;
   padding-inline: 45px;
   border-bottom: 1px solid purple;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 95%;
+  z-index: 0;
 }
 
 .navbar-left {
@@ -21,6 +27,8 @@
 .navbar-brand {
   font-size: 1.8rem;
   margin-right: 20px;
+  text-decoration: none;
+  color: #fff;
 }
 
 .navbar-right {

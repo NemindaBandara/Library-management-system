@@ -1,0 +1,46 @@
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #301934;
+  color: #ffc107;
+  height: 92vh;
+  padding: 30px;
+  margin-top: 20px;
+  
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  /* width: 100%; */
+}
+
+.hero-text {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  word-spacing: 1%;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  max-width: 1200px; /* Adjusted to a wider value for better readability */
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 800px;
+  height: 400px; /* Add a height to ensure the background image shows up */
+  margin-top: 20px;
+  background: url('/Images/sabaragamuwa-university.jpg') center center no-repeat;
+  background-size: contain;
+  align-self: center;
+}
+
