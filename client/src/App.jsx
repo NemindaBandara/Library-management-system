@@ -7,8 +7,25 @@ import Dashboard from './components/Dashboard';
 import AddStudent from './components/AddStudent';
 import { useEffect,useState } from 'react';
 import Logout from './components/Logout';
+import AddBook from './components/AddBook';
+import axios from 'axios';
+
 function App() {
   const [ role, setRole ] = useState('')
+
+  axios.defaults.withCredentials = true;
+  useEffect(() => {
+    axios.get('http://localhost:3001/auth/verify')
+    .then(res => {
+      if(res.data.login) {
+        setRole(res.data.role)
+      } else {
+        setRole('')
+      }
+      console.log(res)
+    }).catch(err => console.log(err))
+  }, [])
+
   return (
     <BrowserRouter>
       <Navbar role = {role} />
@@ -19,6 +36,7 @@ function App() {
         <Route path='/addstudent' element={<AddStudent />}></Route>
         <Route path='/dashboard' element={<Dashboard />}></Route>
         <Route path='/logout' element={<Logout setRole = {setRole}/>}></Route>
+        <Route path='/addbook' element={<AddBook />}></Route>
       </Routes>
     </BrowserRouter>
   )
