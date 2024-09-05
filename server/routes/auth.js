@@ -63,4 +63,9 @@ const verifyAdmin = (req, res, next) => {
   }
 };
 
+router.get("/logout", (req, res) => {
+  res.clearCookie("token");
+  return res.json({ logout: true });
+});
+
 export { router as AdminRouter, verifyAdmin };

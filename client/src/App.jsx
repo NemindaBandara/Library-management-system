@@ -6,17 +6,19 @@ import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import AddStudent from './components/AddStudent';
 import { useEffect,useState } from 'react';
+import Logout from './components/Logout';
 function App() {
-
+  const [ role, setRole ] = useState('')
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar role = {role} />
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path='/books' element={<Books />}></Route>
-        <Route path='/login' element={<Login />}></Route>
+        <Route path='/login' element={<Login setRoleVar = {setRole} />}></Route>
         <Route path='/addstudent' element={<AddStudent />}></Route>
         <Route path='/dashboard' element={<Dashboard />}></Route>
+        <Route path='/logout' element={<Logout setRole = {setRole}/>}></Route>
       </Routes>
     </BrowserRouter>
   )
