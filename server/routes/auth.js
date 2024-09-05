@@ -1,5 +1,6 @@
 import express from "express";
 import { Admin } from "../models/Admin.js";
+import { Student } from "../models/Student.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
@@ -24,6 +25,20 @@ router.post("/login", async (req, res) => {
       res.cookie("token", token, { httpOnly: true, secure: true });
       return res.json({ login: true, role: "admin" });
     } else if (role === "student") {
+      const student = await Student.findOne({ username });
+      if (!student) {
+        return res.json({ message: "Student not registered" });
+      }
+      const validPassword = await bcrypt.compare(password, student.password);
+      if (!validPassword) {
+        return res.json({ message: "Wrong password" });
+      }
+      const token = jwt.sign(
+        { username: student.username, role: "student" },
+        process.env.Student_Key
+      );
+      res.cookie("token", token, { httpOnly: true, secure: true });
+      return res.json({ login: true, role: "student" });
     } else {
     }
   } catch (err) {
@@ -31,4 +46,21 @@ router.post("/login", async (req, res) => {
   }
 });
 
-export { router as AdminRouter };
+const verifyAdmin = (req, res, next) => {
+  const token = req.cookies.token;
+  if (!token) {
+    return res.json({ message: "Invalid Admin" });
+  } else {
+    jwt.verify(token, process.env.Admin_Key, (err, decoded) => {
+      if (err) {
+        return res.json({ message: "invalid token" });
+      } else {
+        req.username = decoded.username;
+        req.role = decoded.role;
+        next();
+      }
+    });
+  }
+};
+
+export { router as AdminRouter, verifyAdmin };
