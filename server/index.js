@@ -6,6 +6,9 @@ import "./db.js";
 import { AdminRouter } from "./routes/auth.js";
 import { studentRouter } from "./routes/student.js";
 import { bookRouter } from "./routes/book.js";
+import { Book } from "./models/Book.js";
+import { Student } from "./models/Student.js";
+import { Admin } from "./models/Admin.js";
 
 dotenv.config();
 
@@ -22,6 +25,17 @@ dotenv.config();
 app.use("/auth", AdminRouter);
 app.use("/student", studentRouter);
 app.use("/book", bookRouter);
+
+app.get("/dashboard", async (req, res) => {
+  try {
+    const student = await Student.countDocuments();
+    const admin = await Admin.countDocuments();
+    const book = await Book.countDocuments();
+    return res.json({ ok: true, student, admin, book });
+  } catch {
+    return res.json(err);
+  }
+});
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is Running on Port ${process.env.PORT}`);
