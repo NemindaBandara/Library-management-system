@@ -1,22 +1,24 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 .navbar {
   display: flex;
   justify-content: space-between;
   padding: 12px;
-  background-color: #301934;
-  color: white;
+  background-color: #8A6854; 
+  color: #FFF2E1; 
   padding-inline: 45px;
-  border-bottom: 1px solid purple;
-
+  border-bottom: 2px solid #D1BB9E; 
+  
   position: fixed;
   top: 0;
   left: 0;
-  width: 95%;
-  z-index: 0;
+  width: 100%; 
+  z-index: 10; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .navbar-left {
@@ -25,10 +27,12 @@
 }
 
 .navbar-brand {
-  font-size: 1.8rem;
+  font-size: 2rem; 
   margin-right: 20px;
   text-decoration: none;
-  color: #fff;
+  color: #FFF2E1; 
+  font-weight: bold;
+  letter-spacing: 0.05rem; 
 }
 
 .navbar-right {
@@ -37,11 +41,18 @@
 }
 
 .navbar-link {
-  color: #fff;
+  color: #FFF2E1;
   text-decoration: none;
   margin-left: 20px;
+  font-size: 1.1rem;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 5px; 
 }
 
 .navbar-link:hover {
-  text-decoration: underline;
+  background-color: #D1BB9E; 
+  color: #A79277; 
+  text-decoration: none; 
 }
+
